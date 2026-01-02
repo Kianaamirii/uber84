@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ride Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="box">
+    <h2>Ride Result</h2>
+
+    <p><strong>Fare:</strong> {{ fare }}</p>
+    <p><strong>Trip Time (hours):</strong> {{ time }}</p>
+
+    <h3>Analytics</h3>
+    <p>Total Rides: {{ analytics.total_rides }}</p>
+    <p>Average Fare: {{ analytics.average_fare }}</p>
+    <p>Average Trip Time: {{ analytics.average_trip_time }}</p>
+
+    <a href="/">New Ride</a>
+</div>
+</body>
+</html>
