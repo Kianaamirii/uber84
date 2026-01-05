@@ -1,59 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Uber Ride Simulation</title>
+
     <style>
         body {
-            font-family: Arial;
-            background: #f4f4f4;
-            padding: 40px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #000000, #1c1c1c);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .box {
-            background: white;
+
+        .container {
+            background: #ffffff;
+            width: 420px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #000;
+            color: white;
+            text-align: center;
             padding: 20px;
-            width: 400px;
-            border-radius: 10px;
         }
+
+        .header img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
         input, button {
             width: 100%;
-            padding: 8px;
-            margin: 5px 0;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
         }
+
+        button {
+            background: #000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
         .result {
             margin-top: 15px;
-            background: #e3f2fd;
-            padding: 10px;
+            padding: 12px;
+            background: #f1f8e9;
+            border-left: 5px solid #4caf50;
+        }
+
+        .error {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+
+        .label {
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
-<div class="box">
-    <h2>Uber Ride Simulation</h2>
+<div class="container">
 
-    <form method="post">
-        <input type="text" name="name" placeholder="Passenger Name" required>
+    <div class="header">
+        <!-- عکس ماشین (می‌تونی عوضش کنی) -->
+        <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt="Car">
+        <h2>Uber Ride Simulation</h2>
+        <p>Request your ride</p>
+    </div>
 
-        <input type="number" step="any" name="px" placeholder="Passenger X" required>
-        <input type="number" step="any" name="py" placeholder="Passenger Y" required>
+    <div class="content">
+        <form method="post">
+            <input type="text" name="name" placeholder="Passenger Name" required>
 
-        <input type="number" step="any" name="dx" placeholder="Destination X" required>
-        <input type="number" step="any" name="dy" placeholder="Destination Y" required>
+            <input type="number" step="any" name="px" placeholder="Passenger X" required>
+            <input type="number" step="any" name="py" placeholder="Passenger Y" required>
 
-        <button type="submit">Request Ride</button>
-    </form>
+            <input type="number" step="any" name="dx" placeholder="Destination X" required>
+            <input type="number" step="any" name="dy" placeholder="Destination Y" required>
 
-    {% if result %}
-        <div class="result">
+            <button type="submit">🚕 Request Ride</button>
+        </form>
+
+        {% if result %}
             {% if result.error %}
-                <strong>{{ result.error }}</strong>
+                <div class="result error">
+                    <strong>{{ result.error }}</strong>
+                </div>
             {% else %}
-                <p><b>Passenger:</b> {{ result.passenger }}</p>
-                <p><b>Nearest Driver:</b> {{ result.driver }}</p>
-                <p><b>Fare:</b> {{ result.fare }} ₺</p>
+                <div class="result">
+                    <p><span class="label">Passenger:</span> {{ result.passenger }}</p>
+                    <p><span class="label">Driver:</span> {{ result.driver }}</p>
+                    <p><span class="label">Fare:</span> {{ result.fare }} ₺</p>
+                </div>
             {% endif %}
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
+
 </div>
 </body>
 </html>
